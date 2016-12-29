@@ -1,0 +1,40 @@
+<html>
+<head>
+	<title>Belt Reviewer Display One User</title>
+</head>
+<body>
+	<div class = "container">
+ 		<div class = "row">
+ 			<div class = "col-sm-8 col-sm-offset-2">
+ 				<h1>{{ book.title }}</h1>
+ 				<h2>{{ book.author_id.name }}</h2>
+ 				<h2> Reviews</h2>
+			  	{% for book_review in book_reviews %}
+				   <p class = "message">Rating {{ book_review.rating}} </p>
+				   <p class = "message">{{ book_review.user_id.firstName}}: {{ book_review.review }}</p>
+				   <p class = "message">{{ book_review.created_at}} </p>
+					{% if request.session.login == book_review.user_id.id %}
+						<a href="{%url 'beltReviewer:delete' id=book_review.id %}">Delete</a>
+					{% endif %}
+			   	{% endfor %}
+			</div>
+		</div>
+	</div>
+	<form action="{%url 'beltReviewer:newReview' %}" method='post'>
+    {% csrf_token %}
+    	 <input type='hidden' name='title' value='{{book.id}}'> 
+    	 <input type='hidden' name='author' value='{{book.author_id.id}}'>
+          Review: <textarea rows="4" cols="50" name = 'review'></textarea>
+          Rating:  
+          <select name = "rating">
+            <option value = 5> "5" </option>
+            <option value = 3> "4" </option>
+            <option value = 3> "3" </option>
+            <option value = 2> "2" </option>
+            <option value = 1> "1" </option>
+          </select>
+          <input type='submit' value='Submit Review'>
+    </form>
+	<a href="{%url 'beltReviewer:index' %}">Go Back to Display</a>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Belt Review Create Page</title>
+</head>
+<body>
+	<h1> Add A New Book Title and a Review </h1>
+	<form action="{%url 'beltReviewer:create' %}" method='post'>
+    {% csrf_token %}
+          Book Title: <input type='text' name='title'> 
+          <select name = "author">
+          {% for author in authors %}
+            <option value ="{{author.id}}">{{author.name}}</option>
+          {% endfor %}
+          </select>
+          Author: <input type='text' name='author'>
+          Review: <textarea rows="4" cols="50" name = 'review'></textarea>
+          Rating:  
+          <select name = "rating">
+            <option value = 5> "5" </option>
+            <option value = 4> "4" </option>
+            <option value = 3> "3" </option>
+            <option value = 2> "2" </option>
+            <option value = 1> "1" </option>
+          </select>
+          <input type='submit' value='Add Book and Review'>
+    </form>
+    <a href="{%url 'beltReviewer:index' %}">Go Back to Display</a>
+    <a href="{%url 'login:index' %}">Log Out</a>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Show User Belt Reviewer</title>
+</head>
+<body>
+	<div class = "container">
+ 		<div class = "row">
+ 			<div class = "col-sm-8 col-sm-offset-2">
+ 				<h2>User: NAME </h2>
+			  	{% for user in users %}
+				   <p class = "message">Name: {{ user.firstName }} {{user.lastName }} </p>
+				   <p class = "message">Email: {{ user.email }} </p>
+				   <p class = "message">Total Reviews: {{ user.reviewcount }} </p>
+			   	{% endfor %}
+			</div>
+		</div>
+	</div>
+	<h1>Posted Reviews on the following books:</h1>
+		{% for book in books %}
+			<p> {{ book.title }}</p>
+		{% endfor %}
+	<a href="{%url 'beltReviewer:index' %}">Home</a>
+	<a href="{%url 'beltReviewer:createDisplay' %}">Add Book and Review</a>
+	<a href="{%url 'beltReviewer:logout' %}">Logout</a>
+</body>
+</html>
